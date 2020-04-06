@@ -107,10 +107,22 @@
         (owns caravel)
     )
   )
+  (:action makeRing
+    :precondition(and
+        (owns golden_brick)
+        (owns pearl)
+    )
+    :effect(and
+        (not(owns golden_brick))
+        (not(owns pearl))
+        (owns ring)
+
+    )
+  )
 
 
   ;;;forest
-  (:action getWood
+  (:action getWoodF
     :precondition(and
         (at forest)
         (not (owns wood))
@@ -136,6 +148,7 @@
     )
     :effect(and
       (owns map)
+      (not(owns alcohol))
       (has_status dubious_contacts)
     )
   )
@@ -146,6 +159,7 @@
     :effect(and
         (owns bear_fur)
         (has_status tough)
+        (has_status is_impressive)
     )
   )
 
@@ -170,7 +184,7 @@
       (owns golden_grain)
     )
   )
-  (:action takeBath
+  (:action takeBathR
     :precondition(and
         (at river)
         (not (is_intoxicated sober))
@@ -319,6 +333,7 @@
     :effect(and
       (not (owns golden_coin))
       (has_status captain)
+      (has_status is_impressive)
     )
   )
   ;;;sea
@@ -361,6 +376,8 @@
         (owns golden_grain)
         (owns golden_coin)
         (owns golden_brick)
+        (has_status is_impressive)
+        (has_status defeated_pirates)
     )
   )
   (:action findPearl
@@ -371,7 +388,7 @@
         (owns pearl)
     )
   )
-  (:action takeBath
+  (:action takeBathP
     :precondition(and
         (at port)
         (not(is_intoxicated addicted))
@@ -381,6 +398,84 @@
         (not(is_intoxicated drunk))
         (not(is_intoxicated buzzed))
         (is_intoxicated sober)
+    )
+  )
+  ;;;
+  (:action propose
+    :precondition(and
+        (at lighthouse)
+        (owns ring)
+        (owns flowers)
+        (has_status is_impressive)
+    )
+    :effect(and
+        (has_status proposed)
+        (not(owns ring))
+        (not(owns flowers))
+    )
+  )
+  ;;;island
+  (:action getCoconuts
+    :precondition(and
+        (at island)
+    )
+    :effect(and
+        (owns coconuts)
+    )
+  )
+  (:action getWoodI
+    :precondition(and
+        (at island)
+    )
+    :effect(and
+        (owns wood)
+    )
+  )
+  (:action getCocain
+    :precondition(and
+        (at island)
+        (owns map)
+    )
+    :effect(and
+        (owns cocain)
+    )
+  )
+  ;;;;;;;;;;;;happines
+  (:action getMarried
+    :precondition(and
+        (has_status good_contacts)
+        (has_status proposed)
+        (not(owns criminal_record))
+        (not(is_intoxicated drunk))
+        (not(is_intoxicated addicted))
+    )
+    :effect(and
+        (is_in_state happy)
+    )
+  )
+  (:action becomeAdmiral
+    :precondition(and
+        (has_status captain)
+        (has_status defeated_pirates)
+        (at academy)
+        (not(is_intoxicated buzzed))
+        (not(is_intoxicated drunk))
+        (not(is_intoxicated addicted))
+    )
+    :effect(and
+        (is_in_state happy)
+    )
+  )
+  (:action becomeCrackhead
+    :precondition(and
+        (owns cocain)
+        (is_intoxicated addicted)
+        (owns fregata)
+        (has_status smuggler_friends)
+        (owns golden_brick)
+    )
+    :effect(and
+        (is_in_state happy)
     )
   )
 

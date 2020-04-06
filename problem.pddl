@@ -5,7 +5,7 @@
   (:objects
     forest river port pub city academy lighthouse sea island - place
     wood golden_grain golden_coin golden_brick ship alcohol flowers map pearl ring cocain goods criminal_record boat fregata caravel coconuts bear_fur - item
-    dubious_contacts good_contacts smuggler_friends tough captain - social_status
+    dubious_contacts good_contacts smuggler_friends tough captain is_impressive proposed defeated_pirates - social_status
     sober buzzed drunk addicted - intoxication
     can_sail happy - state )
   ;<PDDL code for initial state>
@@ -34,6 +34,6 @@
   )
 
 
-  (:goal (and (at lighthouse) (owns flowers) (is_intoxicated addicted) (has_status tough) ) )
+  (:goal (and (is_in_state happy) ) )
 
 )
