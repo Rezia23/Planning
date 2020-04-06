@@ -1,7 +1,6 @@
 (define (domain sailor)
 (:requirements :strips :typing)
 (:types place item intoxication social_status state)
-    ;<PDDL code for predicates>
 (:predicates
   (at ?where - place)
   (owns ?what - item)
@@ -10,8 +9,12 @@
   (is_intoxicated ?how - intoxication)
   (has_status ?what - social_status)
   (is_in_state ?s - state)
+  (can_give_map)
+  (pearl_in_sea)
+  (boat_stealable)
 
 )
+;;;;;;;; Movement
   (:action walk
     :parameters (?from - place ?to - place)
     :precondition(and
@@ -36,7 +39,7 @@
       (at ?to)
     )
   )
-  ;;;drink
+;;;;;;;; Drinking
   (:action getBuzzed
     :precondition(and
         (owns alcohol)
@@ -70,7 +73,7 @@
       (is_intoxicated addicted)
     )
   )
-  ;;;crafting
+;;;;;;;; Crafting
   (:action makeBoat
     :precondition(and
         (owns wood)
@@ -121,11 +124,10 @@
   )
 
 
-  ;;;forest
+;;;;;;;; Forest
   (:action getWoodF
     :precondition(and
         (at forest)
-        (not (owns wood))
     )
     :effect(and
       (owns wood)
@@ -134,7 +136,6 @@
   (:action getFlowers
     :precondition(and
         (at forest)
-        (not (owns flowers))
     )
     :effect(and
       (owns flowers)
@@ -144,7 +145,7 @@
     :precondition(and
         (at forest)
         (owns alcohol)
-        (not (owns map))
+        (can_give_map)
     )
     :effect(and
       (owns map)
@@ -163,11 +164,11 @@
     )
   )
 
-  ;;;river
+;;;;;;;; River
   (:action stealBoat
     :precondition(and
         (at river)
-        (not (owns boat))
+        (boat_stealable)
     )
     :effect(and
       (owns boat)
@@ -196,11 +197,10 @@
       (not (is_intoxicated drunk))
     )
   )
-  ;;; port
+;;;;;;;; Port
    (:action work
     :precondition(and
         (at port)
-        (not (owns golden_grain))
     )
     :effect(and
       (owns golden_grain)
@@ -236,7 +236,7 @@
       (has_status smuggler_friends)
     )
   )
-  ;;; pub
+;;;;;;;; Pub
   (:action getAlcohol
     :precondition(and
         (at pub)
@@ -267,7 +267,7 @@
       (has_status tough)
     )
   )
-  ;;;city
+;;;;;;;; City
    (:action spareInBank
     :precondition(and
         (at city)
@@ -323,7 +323,7 @@
       (not(is_intoxicated addicted))
     )
   )
-  ;;;academy
+;;;;;;;; Academy
    (:action study
     :precondition(and
         (at academy)
@@ -336,7 +336,7 @@
       (has_status is_impressive)
     )
   )
-  ;;;sea
+;;;;;;;; Sea
    (:action getRobbed
     :precondition(and
         (at sea)
@@ -383,6 +383,7 @@
   (:action findPearl
     :precondition(and
         (at sea)
+        (pearl_in_sea)
     )
     :effect(and
         (owns pearl)
@@ -400,7 +401,7 @@
         (is_intoxicated sober)
     )
   )
-  ;;;
+;;;;;;;; Lighthouse
   (:action propose
     :precondition(and
         (at lighthouse)
@@ -414,7 +415,7 @@
         (not(owns flowers))
     )
   )
-  ;;;island
+;;;;;;;; Island
   (:action getCoconuts
     :precondition(and
         (at island)
@@ -440,7 +441,7 @@
         (owns cocain)
     )
   )
-  ;;;;;;;;;;;;happines
+;;;;;;;; Becoming happy
   (:action getMarried
     :precondition(and
         (has_status good_contacts)

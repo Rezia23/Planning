@@ -8,7 +8,7 @@
     dubious_contacts good_contacts smuggler_friends tough captain is_impressive proposed defeated_pirates - social_status
     sober buzzed drunk addicted - intoxication
     can_sail happy - state )
-  ;<PDDL code for initial state>
+    
   (:init
 
     (at port)
@@ -31,6 +31,9 @@
     (has_sail_path sea lighthouse)
     (has_sail_path lighthouse sea)
     (is_intoxicated sober)
+    (can_give_map)
+    (pearl_in_sea)
+    (boat_stealable)
   )
 
 
